@@ -392,7 +392,7 @@ mod tests {
     #[test]
     fn new_chain_uses_custom_reward_when_provided() {
         let chain = Chain::new("Tilt".to_string(), 1, Some(100.0));
-        assert!((chain.get_reward() - 50.0).abs() < f32::EPSILON);
+        assert!((chain.get_reward() - 100.0).abs() < f32::EPSILON);
     }
 
     #[test]
