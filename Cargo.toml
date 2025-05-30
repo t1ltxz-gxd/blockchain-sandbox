@@ -1,0 +1,23 @@
+[package]
+name = "blockchain-sandbox"
+description = "A simple Rust blockchain sandbox for experimenting with block creation, mining, transactions, and adjustable difficulty/reward."
+authors = ["t1ltxz.gxd? <git@t1ltxz.ninja>"]
+categories = ["cryptography"]
+keywords = ["blockchain", "sandbox", "experiments", "decentralized"]
+repository = "github.com/t1ltxz-gxd/blockchain-sandbox"
+version = "0.0.0"
+edition = "2024"
+license = "MIT"
+
+[dependencies]
+chrono = { version = "0.4.41", features = ["serde"] }
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+sha2 = "0.10.9"
+colored = "3.0.0"
+indicatif = "0.17.11"
+
+[package.metadata.git-cliff.git]
+conventional_commits = true
+commit_parsers = []
+filter_commits = false
