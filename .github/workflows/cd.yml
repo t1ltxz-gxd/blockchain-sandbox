@@ -25,6 +25,23 @@ jobs:
           VERSION=$(grep '^version =' Cargo.toml | head -n 1 | awk -F '"' '{print $2}')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
+      - name: Extract changelog for current version
+        id: extract-changelog
+        run: |
+          VERSION="${{ steps.get-version.outputs.version }}"
+          # Extract changelog between the current version header and the next header or EOF
+          CHANGELOG=$(awk -v ver="## $VERSION" '
+          BEGIN { found=0; }
+          $0 ~ "^" ver { found=1; next; }
+          found && $0 ~ /^## / { exit; }
+          found { print; }
+          ' CHANGELOG.md)
+          # Properly format the changelog for GitHub Actions output
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "changelog=$CHANGELOG" >> $GITHUB_OUTPUT
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -147,5 +164,6 @@ jobs:
         with:
           files: dist/*
           tag_name: v${{ needs.deploy.outputs.version }}
+          body: ${{ needs.deploy.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
