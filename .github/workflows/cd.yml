@@ -32,6 +32,13 @@ jobs:
           cache: true
           components: rustfmt,clippy
 
+      - name: Install MinGW-w64 (Windows target only)
+        if: matrix.target == 'x86_64-pc-windows-gnu'
+        shell: powershell
+        run: |
+          choco install mingw -y
+          echo "C:\ProgramData\chocolatey\bin" >> $env:GITHUB_PATH
+
       - name: Build binary
         run: cargo build --release --target ${{ matrix.target }}
 
