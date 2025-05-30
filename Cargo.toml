@@ -5,7 +5,7 @@ authors = ["t1ltxz.gxd? <git@t1ltxz.ninja>"]
 categories = ["cryptography"]
 keywords = ["blockchain", "sandbox", "experiments", "decentralized"]
 repository = "github.com/t1ltxz-gxd/blockchain-sandbox"
-version = "0.0.0"
+version = "0.1.0"
 edition = "2024"
 license = "MIT"
 
