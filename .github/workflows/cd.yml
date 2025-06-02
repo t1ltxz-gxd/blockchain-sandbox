@@ -7,9 +7,15 @@ on:
       - completed
     branches:
       - main
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   deploy:
+    if: |
+      (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')) ||
+      (github.event_name == 'workflow_run' && startsWith(github.event.workflow_run.head_branch, 'v'))
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.get-version.outputs.version }}
