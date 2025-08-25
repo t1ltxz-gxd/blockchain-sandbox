@@ -12,7 +12,7 @@ license = "MIT"
 [dependencies]
 chrono = { version = "0.4.41", features = ["serde"] }
 serde = { version = "1.0.219", features = ["derive"] }
-serde_json = "1.0.140"
+serde_json = "1.0.143"
 sha2 = "0.10.9"
 colored = "3.0.0"
 indicatif = "0.17.11"
